@@ -16,12 +16,23 @@ div.recipeViewDescription{
 
 .recipeViewLabel{
 	padding: 15px 15px 0px 15px;
-	font-weight: bold;	
+		
 }
 
 div.recipeViewValue{
 	padding: 0px 15px 15px 15px;	
 }
 
-.foo {  font-style: italic; }
+.menuParent {  
+	font-weight: bold; 
+}
+.menuRed{
+	 background-color: red; 
+}
+.menuChild  { display: none !important; }
 .x-tree-icon { display: none !important; }
+
+
+.x-tree-panel .x-grid-row .x-grid-cell-first{
+    background-color: red;
+}
