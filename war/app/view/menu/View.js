@@ -6,11 +6,11 @@ Ext.define('RA.view.menu.View' ,{
     floating: false,
     showSeparator: false,
     minWidth: 145,
-    bodyCls: 'menuParent',
+    bodyCls: 'menuBase',
     items: [
             {
             	text: 'Recipe Box',
-            	cls:  'menuParent',
+            	cls:  'menuParent'
             },
             {   
             	text: 'Create Recipe'

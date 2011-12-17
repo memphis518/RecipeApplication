@@ -23,12 +23,14 @@ div.recipeViewValue{
 	padding: 0px 15px 15px 15px;	
 }
 
-.menuParent {   
+.menuBase {   
 	background-color:43488C !important;
-	color: white !important;
+	border-color: DADCF2 !important;
 	font-size: 15 !important;
 	font-weight: bold !important; 
 	font-family: Verdana !important;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 .menuChild {   

@@ -2,17 +2,7 @@ Ext.define('RA.view.recipe.List' ,{
 	extend: 'Ext.panel.Panel',
     alias : 'widget.recipeslist',
     border: false,
-    items: [
-            {
-            	xtype: 'panel',
-            	border: false,
-            	items: [
-            	        {
-            	        	xtype: 'button',
-            	        	text:  'Create Recipe' 
-            	        }
-            	       ]
-            },           
+    items: [     
             {
             	xtype: 'dataview',
             	store: 'Recipes',

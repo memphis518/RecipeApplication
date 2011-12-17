@@ -8,7 +8,7 @@ Ext.define('RA.view.recipe.Form' ,{
 				html:  '<h1> Create Recipe </h1>',
 				width: 600,
 				height: 45,
-	            border: false,
+	            border: false
 			},
             {
 		       xtype: 'textfield',

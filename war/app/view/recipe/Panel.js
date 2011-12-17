@@ -7,13 +7,13 @@ Ext.define('RA.view.recipe.Panel' ,{
     border: false,
     items: [
             {
-			    xtype: 'recipeslist',
+			    xtype: 'recipeslist'
 			},
 			{
-			    xtype: 'recipeview',
+			    xtype: 'recipeview'
 			},
 			{
-			    xtype: 'recipeform',
+			    xtype: 'recipeform'
 			}
 			
     	   ]

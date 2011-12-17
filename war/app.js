@@ -46,7 +46,7 @@ Ext.application({
 								{
 									xtype: 'panel',
 								    width: '100%',
-								    border: true,
+								    border: false,
 								    items: [
 								            	{
 								            	  xtype: 'recipepanel'
