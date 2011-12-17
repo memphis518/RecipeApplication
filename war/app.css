@@ -23,16 +23,18 @@ div.recipeViewValue{
 	padding: 0px 15px 15px 15px;	
 }
 
-.menuParent {  
-	font-weight: bold; 
+.menuParent {   
+	background-color:43488C !important;
+	color: white !important;
+	font-size: 15 !important;
+	font-weight: bold !important; 
+	font-family: Verdana !important;
 }
-.menuRed{
-	 background-color: red; 
+
+.menuChild {   
+	background-color:DADCF2 !important;
+	font-size: 12 !important; 
+	font-family: Verdana !important;
 }
-.menuChild  { display: none !important; }
+
 .x-tree-icon { display: none !important; }
-
-
-.x-tree-panel .x-grid-row .x-grid-cell-first{
-    background-color: red;
-}

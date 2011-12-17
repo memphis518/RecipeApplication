@@ -1,16 +1,22 @@
 Ext.define('RA.view.menu.View' ,{
-	extend: 'Ext.tree.Panel',
+	extend: 'Ext.menu.Menu',
     alias : 'widget.menuview',
-    width: 200,
+    width: 150,
     height: 300,
-    useArrows: true,
-    store: 'MenuItems',
-    forceFit : true,
-    columns : [{
-        xtype : 'treecolumn',
-        dataIndex : 'name'
-    }],
-    hideHeaders : true,
-    rootVisible: false
-    
+    floating: false,
+    showSeparator: false,
+    minWidth: 145,
+    bodyCls: 'menuParent',
+    items: [
+            {
+            	text: 'Recipe Box',
+            	cls:  'menuParent',
+            },
+            {   
+            	text: 'Create Recipe'
+            },
+            {
+            	text: 'View Recipes'
+            }
+           ]
 });
