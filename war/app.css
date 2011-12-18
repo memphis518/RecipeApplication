@@ -23,20 +23,21 @@ div.recipeViewValue{
 	padding: 0px 15px 15px 15px;	
 }
 
+.baseContainer: {
+	border-left: 1px solid CCCCCC;
+}
+
+.x-menu-item-icon{
+    display:none !important;
+}
+
+.x-menu-item-link{
+	padding-left: 5px !important;
+ }
+ 
 .menuBase {   
-	background-color:43488C !important;
-	border-color: DADCF2 !important;
+	background-color:FFFFFF !important;
 	font-size: 15 !important;
-	font-weight: bold !important; 
 	font-family: Verdana !important;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+	padding-left: 25px;
 }
-
-.menuChild {   
-	background-color:DADCF2 !important;
-	font-size: 12 !important; 
-	font-family: Verdana !important;
-}
-
-.x-tree-icon { display: none !important; }

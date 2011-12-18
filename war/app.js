@@ -25,28 +25,25 @@ Ext.application({
             height: '100%',
             items: [
                 {
-                	xtype: 'panel',
                 	html:  'Recipe Application',
                 	height: 100,
                 	border: false
                 },
                 {
-                	xtype: 'panel',
                 	layout: 'hbox',
                 	width:  '100%',
                 	border: false,
                 	items: [
 								{
-								    xtype: 'panel',
 								    width: 200,
 								    border: false,
 								    items:[{xtype:'menuview'}]
 								    
 								},
 								{
-									xtype: 'panel',
 								    width: '100%',
 								    border: false,
+								    style: {'border-left':'1px solid CCCCCC'},
 								    items: [
 								            	{
 								            	  xtype: 'recipepanel'
