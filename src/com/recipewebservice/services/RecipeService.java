@@ -3,6 +3,8 @@ package com.recipewebservice.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Path;
+
 import javax.jdo.PersistenceManager;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -17,6 +19,7 @@ import com.recipewebservice.models.Ingredient;
 import com.recipewebservice.models.Recipe;
 import com.recipewebservice.utils.PMF;
 
+@Path("/")
 public class RecipeService implements IRecipe{
 
 	public RecipeContract getRecipe(int id){
