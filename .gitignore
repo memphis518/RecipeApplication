@@ -1,3 +1,4 @@
 *.class
 *.log
 *.bin
+war/WEB-INF/appengine-generated/*

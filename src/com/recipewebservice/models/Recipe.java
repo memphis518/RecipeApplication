@@ -1,4 +1,4 @@
-package com.recipewebservice.model;
+package com.recipewebservice.models;
 
 import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;

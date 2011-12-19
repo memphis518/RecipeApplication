@@ -1,20 +1,21 @@
-package com.recipewebservice.converter;
+package com.recipewebservice.contracts;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
-import com.recipewebservice.model.Recipe;
-import com.recipewebservice.model.Ingredient;
+
+import com.recipewebservice.models.Ingredient;
+import com.recipewebservice.models.Recipe;
 
 @XmlRootElement(name = "recipe")
-public class RecipeConverter {
+public class RecipeContract {
 	private Recipe entity = null;
 	
-	public RecipeConverter(){
+	public RecipeContract(){
 		entity = new Recipe();
 	}
 	
-	public RecipeConverter(Recipe recipe){
+	public RecipeContract(Recipe recipe){
 		this.entity = recipe;
 	}
 	
