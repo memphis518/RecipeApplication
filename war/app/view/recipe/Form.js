@@ -87,7 +87,7 @@ Ext.define('RA.view.recipe.Form' ,{
 			    xtype: 'textareafield',
 			    width: 600,
 			    height: 175,
-			    name: 'ingredients',
+			    name: 'ingredientText',
 			    fieldLabel: 'Ingredients',
 			    allowBlank: false
 			},
@@ -101,7 +101,7 @@ Ext.define('RA.view.recipe.Form' ,{
 			}
 		  ],
 	buttons: [{
-	            text: 'Send'
+	            text: 'Save'
 	        },{
 	            text: 'Cancel'
 	        }]

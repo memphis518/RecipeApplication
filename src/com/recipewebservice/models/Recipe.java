@@ -29,9 +29,11 @@ public class Recipe {
 	private String cookingtime;
 	@Persistent
 	private String servings;
-	@Persistent
-	private List<Ingredient> ingredients;
-	
+	//@Persistent
+	//private List<Ingredient> ingredients;
+
+	private String ingredientText;
+
 	public Recipe() {}
 	
 	public Recipe(Entity entity) {
@@ -86,10 +88,16 @@ public class Recipe {
 	public void setServings(String servings) {
 		this.servings = servings;
 	}
-	public List<Ingredient> getIngredients() {
+	/*public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
+	}*/	
+	public String getIngredientText() {
+		return ingredientText;
+	}
+	public void setIngredientText(String ingredientText) {
+		this.ingredientText = ingredientText;
 	}
 }

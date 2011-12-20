@@ -43,13 +43,13 @@ public class RecipeService implements IRecipe{
 		boolean success = true;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		try{
+		//try{
 	        pm.makePersistent(recipe);
-	    }catch(Exception e){ 
+	    /*}catch(Exception e){	     
 	    	success = false;
 	    }finally{
 	        pm.close();
-	    }
+	    }*/
 		
 		return success;
 	}

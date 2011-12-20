@@ -25,6 +25,11 @@ Ext.define('RA.controller.Recipes', {
 	    					click: function(){
 	    						this.recipeList();
 	    					}
+	    				},
+	    				'recipeform button[text=Save]' : {
+	    					click: function(){
+	    						this.saveRecipe();
+	    					}
 	    				}
     	})
     },
@@ -45,5 +50,15 @@ Ext.define('RA.controller.Recipes', {
     	record = store.getAt(index);
     	panel.getLayout().getActiveItem().update(record.data);
     	Ext.History.add("Recipes:viewRecipe:" + index);
+    },
+    saveRecipe: function(){
+    	var panel = this.getRecipePanel();
+    	var form = panel.down('form');
+    	var formValues = form.getValues();
+    	var store = this.getRecipesStore();
+    	store.add(formValues);
+    	store.sync();
+    	this.recipeList();
+    	form.reset();    	
     }
 });

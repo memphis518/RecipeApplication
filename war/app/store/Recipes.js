@@ -4,7 +4,10 @@ Ext.define('RA.store.Recipes', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url : '/resources/recipe/list',
+        api : {
+        	read: '/resources/recipe/list',
+        	create: '/resources/recipe/create'
+        },
         reader: {
             type: 'json',
     		root: 'recipe'
