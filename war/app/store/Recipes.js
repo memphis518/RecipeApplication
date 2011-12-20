@@ -1,11 +1,13 @@
 Ext.define('RA.store.Recipes', {
     extend: 'Ext.data.Store',
     model: 'RA.model.Recipe',
+    autoLoad: true,
     proxy: {
         type: 'ajax',
-        url : '/recipe/list',
+        url : '/resources/recipe/list',
         reader: {
-            type: 'json'
+            type: 'json',
+    		root: 'recipe'
         }
     },
 });

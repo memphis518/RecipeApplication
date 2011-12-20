@@ -13,7 +13,6 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
-import com.recipewebservice.contracts.RecipeContract;
 import com.recipewebservice.interfaces.IRecipe;
 import com.recipewebservice.models.Ingredient;
 import com.recipewebservice.models.Recipe;
@@ -22,32 +21,30 @@ import com.recipewebservice.utils.PMF;
 @Path("/")
 public class RecipeService implements IRecipe{
 
-	public RecipeContract getRecipe(int id){
+	public Recipe getRecipe(int id){
 		 PersistenceManager pm = PMF.get().getPersistenceManager();
-		
 		 Recipe recipe = pm.getObjectById(Recipe.class, id);
-		 
-		 RecipeContract contract = new RecipeContract(recipe);
-		 return contract;
+		 return recipe;
 	} 
 	 
-	public ArrayList<RecipeContract> getRecipeList(){
+	public ArrayList<Recipe> getRecipeList(){
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Recipe");
 		PreparedQuery pq = datastore.prepare(q);
-		ArrayList<RecipeContract> contracts = new ArrayList<RecipeContract>();
+		
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		for (Entity result : pq.asIterable()) {
-			contracts.add(new RecipeContract(new Recipe(result)));
-		}
-		return contracts;
+			recipes.add(new Recipe(result));
+		}		
+		return recipes;
 	}
 	
-	public boolean createRecipe(RecipeContract recipeContract){
+	public boolean createRecipe(Recipe recipe){
 		boolean success = true;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		try{
-	        pm.makePersistent(recipeContract.getRecipe());
+	        pm.makePersistent(recipe);
 	    }catch(Exception e){ 
 	    	success = false;
 	    }finally{

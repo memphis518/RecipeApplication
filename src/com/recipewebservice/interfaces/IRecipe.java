@@ -10,7 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.recipewebservice.contracts.RecipeContract;
+import com.recipewebservice.models.Recipe;
 
 @Path("/")
 public interface IRecipe {
@@ -18,17 +18,17 @@ public interface IRecipe {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/recipe/{id}") 
-	public RecipeContract getRecipe( @PathParam ("id") int id);
+	public Recipe getRecipe( @PathParam ("id") int id);
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/recipe/list") 
-	public ArrayList<RecipeContract> getRecipeList();
+	public ArrayList<Recipe> getRecipeList();
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/recipe/create") 
-	public boolean createRecipe(RecipeContract recipeContract);
+	public boolean createRecipe(Recipe recipe);
 	
 }
