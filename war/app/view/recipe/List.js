@@ -10,7 +10,7 @@ Ext.define('RA.view.recipe.List' ,{
                 	    '<tpl for=".">',
                         '<div class="recipeThumb">',
                           '<img height="150" width="150" src="{src}" />',
-                          '<br/><span style="font-weight: bold; text-align:center;">{title}</span>',
+                          '<br/><span class="thumbTitle" style="text-align:center;">{title}</span>',
                         '</div>',
                         '</tpl>'
                      ],

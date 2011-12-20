@@ -6,7 +6,7 @@ Ext.define('RA.view.recipe.View' ,{
           '<img height="150" width="150" src="{src}" />',
           '</div>',
           '<br/>',
-          '<div style="font-weight: bold;">{title}</div>',
+          '<div class="thumbTitle">{title}</div>',
           '<div class="recipeViewDescription">{description}</div>',
           '<div class="x-clear"></div>',
           '<span class="recipeViewLabel">Servings:</span> {servings}</span>',

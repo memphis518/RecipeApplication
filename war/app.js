@@ -26,6 +26,7 @@ Ext.application({
             items: [
                 {
                 	html:  'Recipe Application',
+                	bodyCls: 'logoDiv',
                 	height: 100,
                 	border: false
                 },
@@ -37,6 +38,7 @@ Ext.application({
 								{
 								    width: 200,
 								    border: false,
+								    bodyPadding: '45 0 0 0',
 								    items:[{xtype:'menuview'}]
 								    
 								},

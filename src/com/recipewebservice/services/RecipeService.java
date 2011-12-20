@@ -37,10 +37,7 @@ public class RecipeService implements IRecipe{
 		PreparedQuery pq = datastore.prepare(q);
 		ArrayList<RecipeContract> contracts = new ArrayList<RecipeContract>();
 		for (Entity result : pq.asIterable()) {
-			Recipe recipe = new Recipe();
-			recipe.setId((String) result.getProperty("id"));
-			RecipeContract contract = new RecipeContract(recipe);
-			contracts.add(contract);
+			contracts.add(new RecipeContract(new Recipe(result)));
 		}
 		return contracts;
 	}

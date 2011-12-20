@@ -1,8 +1,8 @@
 Ext.define('RA.controller.Recipes', {
     extend: 'Ext.app.Controller',
     views: [ 'recipe.Form', 'recipe.Panel', 'recipe.List', 'recipe.View' ],
-    stores: ['Recipes'],
-    models: ['Recipe'],
+    stores: ['Recipes', 'TimeUnits'],
+    models: ['Recipe', 'TimeUnit'],
     refs: [
            {
                ref: 'recipePanel',
@@ -19,6 +19,11 @@ Ext.define('RA.controller.Recipes', {
 	    				'recipeslist > panel > button' : {
 	    					click: function(){
 	    						this.createRecipeForm();
+	    					}
+	    				},
+	    				'recipeform button[text=Cancel]' : {
+	    					click: function(){
+	    						this.recipeList();
 	    					}
 	    				}
     	})

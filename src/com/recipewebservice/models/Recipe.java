@@ -5,6 +5,9 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
+import com.google.appengine.api.datastore.Entity;
+
 import java.util.List;
 
 @PersistenceCapable
@@ -28,6 +31,18 @@ public class Recipe {
 	private String servings;
 	@Persistent
 	private List<Ingredient> ingredients;
+	
+	public Recipe() {}
+	
+	public Recipe(Entity entity) {
+		this.id          = (String) entity.getProperty("id");
+		this.cookingtime = (String) entity.getProperty("cookingtime");
+		this.description = (String) entity.getProperty("description");
+		this.directions  = (String) entity.getProperty("directions");
+		this.preptime    = (String) entity.getProperty("preptime");
+		this.servings    = (String) entity.getProperty("servings");
+		this.title       = (String) entity.getProperty("title");
+	}
 	
 	public String getId() {
 		return id;

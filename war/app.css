@@ -37,7 +37,18 @@ div.recipeViewValue{
  
 .menuBase {   
 	background-color:FFFFFF !important;
-	font-size: 15 !important;
-	font-family: Verdana !important;
 	padding-left: 25px;
+}
+
+* {
+    font-size: 11 !important;
+	font-family: Helvetica !important;
+}
+
+.thumbTitle {
+	font-weight: bold;
+}
+
+.logoDiv {
+	background-color: 4C5D91;	
 }
