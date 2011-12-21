@@ -2,6 +2,7 @@ package com.recipewebservice.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Path;
 
@@ -21,6 +22,8 @@ import com.recipewebservice.utils.PMF;
 @Path("/")
 public class RecipeService implements IRecipe{
 
+	private static final Logger log = Logger.getLogger(RecipeService.class.getName());
+	
 	public Recipe getRecipe(int id){
 		 PersistenceManager pm = PMF.get().getPersistenceManager();
 		 Recipe recipe = pm.getObjectById(Recipe.class, id);
@@ -29,7 +32,8 @@ public class RecipeService implements IRecipe{
 	 
 	public ArrayList<Recipe> getRecipeList(){
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Query q = new Query("Recipe");
+		
+		Query q = new Query("Recipe");		
 		PreparedQuery pq = datastore.prepare(q);
 		
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
@@ -43,13 +47,14 @@ public class RecipeService implements IRecipe{
 		boolean success = true;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		//try{
+		try{
 	        pm.makePersistent(recipe);
-	    /*}catch(Exception e){	     
+	    }catch(Exception e){	 
+	    	log.severe("Error saving recipe with error : " + e.getLocalizedMessage());
 	    	success = false;
 	    }finally{
 	        pm.close();
-	    }*/
+	    }
 		
 		return success;
 	}

@@ -2,6 +2,7 @@ package com.recipewebservice.models;
 
 import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -31,7 +32,8 @@ public class Recipe {
 	private String servings;
 	//@Persistent
 	//private List<Ingredient> ingredients;
-
+	
+	@NotPersistent
 	private String ingredientText;
 
 	public Recipe() {}
