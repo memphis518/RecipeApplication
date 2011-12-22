@@ -19,7 +19,6 @@ public class Ingredient {
 	private float amount;
 	@Persistent
 	private String unit;
-	private String ingredientText;
 	
 	public String getId() {
 		return id;
@@ -44,12 +43,6 @@ public class Ingredient {
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
-	}
-	public String getIngredientText() {
-		return ingredientText;
-	}
-	public void setIngredientText(String ingredientText) {
-		this.ingredientText = ingredientText;
 	}
 	
 }
