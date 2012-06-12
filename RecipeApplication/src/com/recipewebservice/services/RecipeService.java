@@ -22,7 +22,7 @@ public class RecipeService implements IRecipe{
 
 	private static final Logger log = Logger.getLogger(RecipeService.class.getName());
 	
-	public Recipe getRecipe(int id){
+	public Recipe getRecipe(String id){
 		 PersistenceManager pm = PMF.get().getPersistenceManager();
 		 Recipe recipe = pm.getObjectById(Recipe.class, id);
 		 return recipe;

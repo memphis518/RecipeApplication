@@ -127,4 +127,62 @@ public class Recipe {
 	public void removeRecipeImage(int index){
 		this.recipeImages.remove(index);
 	}
+	
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    
+	    Recipe other = (Recipe) obj;
+	    
+	    if( id != other.getId() && 
+	    	!id.equals(other.getId())){
+	    	return false;
+	    }
+	    if( title != other.getTitle() &&
+	    	!title.equals(other.getTitle())){
+	    	return false;
+	    }
+	    if( directions != other.getDirections() &&
+	    	!directions.equals(other.getDirections())){
+	    	return false;
+	    }
+	    if( description != other.getDescription() &&
+	    	!description.equals(other.getDescription())){
+	    	return false;
+	    }
+	    if( preptime != other.getPreptime() &&
+	    	!preptime.equals(other.getPreptime())){
+	    	return false;
+	    }
+	    if( preptimeunit != other.getPreptimeunit() &&
+	    	!preptimeunit.equals(other.getPreptimeunit())){
+	    	return false;
+	    }
+	    if( cookingtime != other.getCookingtime() &&
+	    	!cookingtime.equals(other.getCookingtime())){
+	    	return false;
+	    }
+	    if( cookingtimeunit != other.getCookingtimeunit() &&
+	    	!cookingtimeunit.equals(other.getCookingtimeunit())){
+	    	return false;
+	    }
+	    if( servings != other.getServings() &&
+	    	!servings.equals(other.getServings())){
+	    	return false;
+	    }
+	    if( recipeImages != other.getRecipeImages() &&
+	    	!recipeImages.equals(other.getRecipeImages())){
+	    	return false;
+	    }
+	    if( ingredients != other.getIngredients() &&
+	    	!ingredients.equals(other.getIngredients())){
+	    	return false;
+	    }
+	    return true;
+	}
+	
 }

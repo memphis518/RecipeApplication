@@ -18,7 +18,7 @@ public interface IRecipe {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/recipe/{id}") 
-	public Recipe getRecipe( @PathParam ("id") int id);
+	public Recipe getRecipe( @PathParam ("id") String id);
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
