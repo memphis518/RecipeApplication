@@ -1,6 +1,6 @@
 package com.recipewebservice.interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -23,7 +23,7 @@ public interface IRecipe {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/recipe/list") 
-	public ArrayList<Recipe> getRecipeList();
+	public List<Recipe> getRecipeList();
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

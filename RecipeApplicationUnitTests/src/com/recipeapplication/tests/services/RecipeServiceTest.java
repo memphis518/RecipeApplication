@@ -1,9 +1,9 @@
 package com.recipeapplication.tests.services;
 
-import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
+
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 
@@ -11,11 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.recipewebservice.models.Recipe;
@@ -59,7 +55,7 @@ public class RecipeServiceTest {
 	public void testGetRecipeList() {
 		Recipe recipeConstant = saveTestRecipe();
 		RecipeService rs = new RecipeService();
-		ArrayList<Recipe> recipeTestList = rs.getRecipeList();
+		List<Recipe> recipeTestList = rs.getRecipeList();
 		assertEquals(1, recipeTestList.size());
 		assertEquals(recipeConstant, recipeTestList.get(0));
 	}

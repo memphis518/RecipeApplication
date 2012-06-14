@@ -1,17 +1,12 @@
 package com.recipewebservice.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ws.rs.Path;
-
+import javax.jdo.Query;
 import javax.jdo.PersistenceManager;
-
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
 
 import com.recipewebservice.interfaces.IRecipe;
 import com.recipewebservice.models.Recipe;
@@ -28,16 +23,11 @@ public class RecipeService implements IRecipe{
 		 return recipe;
 	} 
 	 
-	public ArrayList<Recipe> getRecipeList(){
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+	public List<Recipe> getRecipeList(){
+		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		Query q = new Query("Recipe");		
-		PreparedQuery pq = datastore.prepare(q);
-		
-		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-		for (Entity result : pq.asIterable()) {
-			recipes.add(new Recipe(result));
-		}		
+		Query q = pm.newQuery(Recipe.class);		
+		List<Recipe> recipes = (List<Recipe>) q.execute();	
 		return recipes;
 	}
 	

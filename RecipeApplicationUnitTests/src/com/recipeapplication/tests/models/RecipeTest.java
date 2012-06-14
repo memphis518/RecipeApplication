@@ -1,5 +1,6 @@
 package com.recipeapplication.tests.models;
 
+import java.util.ArrayList;
 import javax.jdo.PersistenceManager;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -9,9 +10,12 @@ import com.google.appengine.api.datastore.PreparedQuery;
 
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.tools.development.testing.LocalBlobstoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.recipeapplication.tests.utils.FileReader;
 import com.recipewebservice.models.Recipe;
+import com.recipewebservice.models.RecipeImage;
 import com.recipewebservice.utils.PMF;
 
 
@@ -24,7 +28,8 @@ import org.junit.Test;
 public class RecipeTest {
 
 	private final LocalServiceTestHelper helper =
-	        new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
+	        new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig(),
+	        						   new LocalBlobstoreServiceTestConfig());
 	private Entity recipeTestEntity;
 	
 	@Before
@@ -38,6 +43,19 @@ public class RecipeTest {
 		recipeTestEntity.setProperty("cookingtime", "1");
 		recipeTestEntity.setProperty("cookingtimeunit", "hour");
 		recipeTestEntity.setProperty("servings", "4");
+		
+		FileReader fr = new FileReader();
+		String testImageString = fr.readImageFile("/resources/hamburger.jpeg");
+		ArrayList<RecipeImage> images = new ArrayList<RecipeImage>();
+		
+		RecipeImage recipeImage1 = new RecipeImage();
+		recipeImage1.setImage(testImageString);
+		images.add(recipeImage1);
+		
+		RecipeImage recipeImage2 = new RecipeImage();
+		recipeImage2.setImage(testImageString);
+		images.add(recipeImage2);
+		recipeTestEntity.setProperty("recipeImages",images);
 	}
 
 	@After
@@ -55,6 +73,7 @@ public class RecipeTest {
 		assertEquals(recipe.getCookingtime(), recipeTestEntity.getProperty("cookingtime"));
 		assertEquals(recipe.getCookingtimeunit(), recipeTestEntity.getProperty("cookingtimeunit"));
 		assertEquals(recipe.getServings(), recipeTestEntity.getProperty("servings"));
+		assertEquals(recipe.getRecipeImages(), recipeTestEntity.getProperty("recipeImages"));
 	}
 
 	public void testSets(){
@@ -66,7 +85,7 @@ public class RecipeTest {
 		recipe.setCookingtime((String) recipeTestEntity.getProperty("title"));
 		recipe.setCookingtimeunit((String) recipeTestEntity.getProperty("title"));
 		recipe.setServings((String) recipeTestEntity.getProperty("title"));
-		
+		recipe.setRecipeImages( (ArrayList<RecipeImage>) recipeTestEntity.getProperty("recipeImages"));
 		Recipe recipeControl = new Recipe(recipeTestEntity);
 		
 		assertEquals(recipeControl, recipe);

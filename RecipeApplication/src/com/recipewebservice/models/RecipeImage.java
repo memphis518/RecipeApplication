@@ -29,6 +29,8 @@ public class RecipeImage {
 	private String id;
 	@Persistent
 	private BlobKey blobKey;
+	@Persistent
+	private Recipe recipe;
 	
 	@NotPersistent
 	private String image;
@@ -48,6 +50,7 @@ public class RecipeImage {
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public BlobKey getBlobKey() {
 		return blobKey;
 	}
@@ -57,8 +60,7 @@ public class RecipeImage {
 	
 	public String getImage() {
 		return image;
-	}
-	
+	}	
 	public void setImage(String image) {
 		this.image = image;
 		try{
@@ -66,6 +68,13 @@ public class RecipeImage {
 		}catch(IOException e ){
 			log.severe("Error savimg image: " + e.getLocalizedMessage());
 		}
+	}
+	
+	public Recipe getRecipe(){
+		return recipe;
+	}
+	public void setRecipe(Recipe recipe){
+		this.recipe = recipe;
 	}
 	
 	private BlobKey saveImageToBlobStore(String fileString) throws IOException{
