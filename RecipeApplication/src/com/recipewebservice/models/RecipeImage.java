@@ -13,6 +13,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.files.AppEngineFile;
 import com.google.appengine.api.files.FileService;
 import com.google.appengine.api.files.FileServiceFactory;
@@ -33,7 +34,7 @@ public class RecipeImage {
 	private Recipe recipe;
 	
 	@NotPersistent
-	private String image;
+	private Text image;
 	
 	private static final Logger log = Logger.getLogger(RecipeService.class.getName());
 	
@@ -58,10 +59,10 @@ public class RecipeImage {
 		this.blobKey = blobKey;
 	}
 	
-	public String getImage() {
+	public Text getImage() {
 		return image;
 	}	
-	public void setImage(String image) {
+	public void setImage(Text image) {
 		this.image = image;
 		try{
 			this.blobKey = saveImageToBlobStore(image);
@@ -77,12 +78,12 @@ public class RecipeImage {
 		this.recipe = recipe;
 	}
 	
-	private BlobKey saveImageToBlobStore(String fileString) throws IOException{
+	private BlobKey saveImageToBlobStore(Text image2) throws IOException{
 		FileService fileService = FileServiceFactory.getFileService();
 		AppEngineFile file = fileService.createNewBlobFile("application/octet-stream");
 		FileWriteChannel writeChannel = fileService.openWriteChannel(file, true);
 		PrintWriter out = new PrintWriter(Channels.newWriter(writeChannel, "UTF8"));
-		out.println(fileString);
+		out.println(image2);
 		out.close();
 		writeChannel.closeFinally();
 		BlobKey blobKey = fileService.getBlobKey(file);

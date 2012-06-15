@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.tools.development.testing.LocalBlobstoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
@@ -18,13 +19,13 @@ public class RecipeImageTest {
 	        new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig(),
 	        						   new LocalBlobstoreServiceTestConfig());
 	
-	String testImageString;
+	Text testImageString;
 	
 	@Before
 	public void setUp() throws Exception {
 		helper.setUp();
 		FileReader fr = new FileReader();
-		testImageString = fr.readImageFile("/resources/hamburger.jpeg");
+		testImageString = new Text(fr.readImageFile("/resources/hamburger.jpeg"));
 	}
 
 	@After
