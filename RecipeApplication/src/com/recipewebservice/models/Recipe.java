@@ -1,5 +1,6 @@
 package com.recipewebservice.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.annotations.Extension;
@@ -35,7 +36,7 @@ public class Recipe {
 	private String cookingtimeunit;
 	@Persistent
 	private String servings;
-	@Persistent
+	@Persistent(mappedBy = "recipe")
 	private List<RecipeImage> recipeImages;
 	@Persistent
 	private List<Ingredient> ingredients;
@@ -121,11 +122,14 @@ public class Recipe {
 	public void setRecipeImages(List<RecipeImage> recipeImages) {
 		this.recipeImages = recipeImages;
 	}
-	public void addRecipeImages(RecipeImage recipeImage){
+	public void addRecipeImage(RecipeImage recipeImage){
 		this.recipeImages.add(recipeImage);
 	}
 	public void removeRecipeImage(int index){
 		this.recipeImages.remove(index);
+	}
+	public void clearRecipeImages(){
+		this.recipeImages = new ArrayList<RecipeImage>();
 	}
 	
 	public boolean equals(Object obj) {
@@ -178,10 +182,10 @@ public class Recipe {
 	    	!recipeImages.equals(other.getRecipeImages())){
 	    	return false;
 	    }
-	    if( ingredients != other.getIngredients() &&
+	    /*if( ingredients != other.getIngredients() &&
 	    	!ingredients.equals(other.getIngredients())){
 	    	return false;
-	    }
+	    }*/
 	    return true;
 	}
 	

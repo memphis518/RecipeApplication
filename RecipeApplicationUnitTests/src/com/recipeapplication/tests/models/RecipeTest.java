@@ -1,6 +1,7 @@
 package com.recipeapplication.tests.models;
 
 import java.util.ArrayList;
+
 import javax.jdo.PersistenceManager;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -45,17 +46,19 @@ public class RecipeTest {
 		recipeTestEntity.setProperty("cookingtime", "1");
 		recipeTestEntity.setProperty("cookingtimeunit", "hour");
 		recipeTestEntity.setProperty("servings", "4");
+				
+		images = new ArrayList<RecipeImage>();
 		
 		FileReader fr = new FileReader();
 		Text testImageString = new Text(fr.readImageFile("/resources/hamburger.jpeg"));
-		images = new ArrayList<RecipeImage>();
-		
 		RecipeImage recipeImage1 = new RecipeImage();
 		recipeImage1.setImage(testImageString);
 		images.add(recipeImage1);
 		
+		FileReader fr2 = new FileReader();
+		Text testImageString2 = new Text(fr2.readImageFile("/resources/steak.jpeg"));
 		RecipeImage recipeImage2 = new RecipeImage();
-		recipeImage2.setImage(testImageString);
+		recipeImage2.setImage(testImageString2);
 		images.add(recipeImage2);
 	}
 
@@ -83,17 +86,34 @@ public class RecipeTest {
 	public void testSets(){
 		Recipe recipe = new Recipe();
 		recipe.setTitle((String) recipeTestEntity.getProperty("title"));
-		recipe.setDirections((String) recipeTestEntity.getProperty("title"));
-		recipe.setPreptime((String) recipeTestEntity.getProperty("title"));
-		recipe.setPreptimeunit((String) recipeTestEntity.getProperty("title"));
-		recipe.setCookingtime((String) recipeTestEntity.getProperty("title"));
-		recipe.setCookingtimeunit((String) recipeTestEntity.getProperty("title"));
-		recipe.setServings((String) recipeTestEntity.getProperty("title"));
-		
+		recipe.setDirections((String) recipeTestEntity.getProperty("directions"));
+		recipe.setPreptime((String) recipeTestEntity.getProperty("preptime"));
+		recipe.setPreptimeunit((String) recipeTestEntity.getProperty("preptimeunit"));
+		recipe.setCookingtime((String) recipeTestEntity.getProperty("cookingtime"));
+		recipe.setCookingtimeunit((String) recipeTestEntity.getProperty("cookingtimeunit"));
+		recipe.setServings((String) recipeTestEntity.getProperty("servings"));
 		Recipe recipeControl = new Recipe(recipeTestEntity);
 		
 		assertEquals(recipeControl, recipe);
 		
+	}
+	
+	@Test
+	public void testImages(){
+		Recipe recipe = new Recipe();
+		recipe.setRecipeImages(images);
+		assertEquals(images, recipe.getRecipeImages());
+		
+		recipe.clearRecipeImages();
+		assertEquals(0, recipe.getRecipeImages().size());
+		
+		recipe.addRecipeImage(images.get(0));
+		recipe.addRecipeImage(images.get(1));
+		assertEquals(images, recipe.getRecipeImages());
+		
+		recipe.removeRecipeImage(1);
+		assertEquals(1, recipe.getRecipeImages().size());
+		assertEquals(images.get(0), recipe.getRecipeImages().get(0));	
 	}
 	
 	@Test
@@ -109,17 +129,26 @@ public class RecipeTest {
 	private void doSave(){
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		
 		Query q = new Query("Recipe");		
 		PreparedQuery pq = datastore.prepare(q);
 		assertEquals(0, pq.countEntities(withLimit(10)));
 		
+		Query q2 = new Query("RecipeImage");		
+		pq = datastore.prepare(q2);
+		assertEquals(0, pq.countEntities(withLimit(10)));
+		
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Recipe recipe = new Recipe(recipeTestEntity);
+		recipe.setRecipeImages(images);
 		pm.makePersistent(recipe);
 		pm.close();
 		
 		PreparedQuery pq2 = datastore.prepare(q);
 		assertEquals(1, pq2.countEntities(withLimit(10)));
+				
+		pq2 = datastore.prepare(q2);
+		assertEquals(2, pq.countEntities(withLimit(10)));
 		
 	}
 	
