@@ -1,11 +1,9 @@
 package com.recipewebservice.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.appengine.api.datastore.Entity;
 
 import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -20,12 +18,20 @@ public class Ingredient {
 	@Persistent
 	private String name;
 	@Persistent
-	private float amount;
+	private double amount;
 	@Persistent
 	private String unit;
+	@Persistent
+	private Recipe recipe;
 	
-	@NotPersistent
-	private String ingredientText;
+	public Ingredient() {}
+	
+	public Ingredient(Entity entity){
+		this.id     = (String) entity.getProperty("id");
+		this.name   = (String) entity.getProperty("name");
+		this.amount = (Double) entity.getProperty("amount");
+		this.unit   = (String) entity.getProperty("unit");
+	}
 	
 	public String getId() {
 		return id;
@@ -39,10 +45,10 @@ public class Ingredient {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public float getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	public String getUnit() {
@@ -51,21 +57,34 @@ public class Ingredient {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-
-	public String getIngredientText() {
-		return ingredientText;
-	}
-	public void setIngredientText(String ingredientText) {
-		this.ingredientText = ingredientText;
-	}
-
-	private List<Ingredient> parseIngredientText(String ingredientText){
-		List <Ingredient> ingredients = new ArrayList<Ingredient>();
-		
-		String[] tokens = ingredientText.split("[ ]+");
-		
-		return ingredients;
-	}
 	
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    
+	    Ingredient other = (Ingredient) obj;
+	    
+	    if( id != other.getId() && 
+	    	!id.equals(other.getId())){
+	    	return false;
+	    }
+	    if( name != other.getName() &&
+	    	!name.equals(other.getName())){
+	    	return false;
+	    }
+	    if( amount != other.getAmount() ){
+		    	return false;
+		}
+	    if( unit != other.getUnit() &&
+		    	!unit.equals(other.getUnit())){
+		    	return false;
+		}
+	    
+	    return true;
+	}
 	
 }

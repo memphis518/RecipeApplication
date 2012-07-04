@@ -38,7 +38,7 @@ public class Recipe {
 	private String servings;
 	@Persistent(mappedBy = "recipe")
 	private List<RecipeImage> recipeImages;
-	@Persistent
+	@Persistent(mappedBy = "recipe")
 	private List<Ingredient> ingredients;
 
 	public Recipe() {}
@@ -116,6 +116,15 @@ public class Recipe {
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
+	public void addIngredient(Ingredient ingredient){
+		this.ingredients.add(ingredient);
+	}
+	public void removeIngredient(int index){
+		this.ingredients.remove(index);
+	}
+	public void clearIngredients(){
+		this.ingredients = new ArrayList<Ingredient>();
+	}
 	public List<RecipeImage> getRecipeImages() {
 		return recipeImages;
 	}
@@ -182,10 +191,10 @@ public class Recipe {
 	    	!recipeImages.equals(other.getRecipeImages())){
 	    	return false;
 	    }
-	    /*if( ingredients != other.getIngredients() &&
+	    if( ingredients != other.getIngredients() &&
 	    	!ingredients.equals(other.getIngredients())){
 	    	return false;
-	    }*/
+	    }
 	    return true;
 	}
 	

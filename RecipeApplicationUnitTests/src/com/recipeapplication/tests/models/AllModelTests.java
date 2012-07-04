@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ RecipeImageTest.class, RecipeTest.class })
+@SuiteClasses({ RecipeImageTest.class, RecipeTest.class, IngredientTest.class })
 public class AllModelTests {
 
 }

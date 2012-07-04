@@ -16,6 +16,7 @@ import com.google.appengine.tools.development.testing.LocalBlobstoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.recipeapplication.tests.utils.FileReader;
+import com.recipewebservice.models.Ingredient;
 import com.recipewebservice.models.Recipe;
 import com.recipewebservice.models.RecipeImage;
 import com.recipewebservice.utils.PMF;
@@ -34,10 +35,12 @@ public class RecipeTest {
 	        						   new LocalBlobstoreServiceTestConfig());
 	private Entity recipeTestEntity;
 	private ArrayList<RecipeImage> images;
+	private ArrayList<Ingredient> ingredients;
 	
 	@Before
 	public void setUp() throws Exception {
 		helper.setUp();
+		
 		recipeTestEntity = new Entity("Recipe");
 		recipeTestEntity.setProperty("title", "Test Recipe");
 		recipeTestEntity.setProperty("directions", "These are the directions");
@@ -60,6 +63,21 @@ public class RecipeTest {
 		RecipeImage recipeImage2 = new RecipeImage();
 		recipeImage2.setImage(testImageString2);
 		images.add(recipeImage2);
+				
+		ingredients = new ArrayList<Ingredient>();
+		
+		Ingredient ingredient = new Ingredient();
+		ingredient.setName("Pork Chops");
+		ingredient.setAmount(1.5);
+		ingredient.setUnit("lbs");
+		ingredients.add(ingredient);
+		
+		Ingredient ingredient2 = new Ingredient();
+		ingredient2.setName("Rosemary");
+		ingredient2.setAmount(1);
+		ingredient2.setUnit("twig");
+		ingredients.add(ingredient2);
+		
 	}
 
 	@After
@@ -70,7 +88,6 @@ public class RecipeTest {
 	@Test
 	public void testGets() {
 		Recipe recipe = new Recipe(recipeTestEntity);
-		recipe.setRecipeImages(images);
 		
 		assertEquals(recipe.getTitle(), recipeTestEntity.getProperty("title"));
 		assertEquals(recipe.getDirections(), recipeTestEntity.getProperty("directions"));
@@ -79,7 +96,6 @@ public class RecipeTest {
 		assertEquals(recipe.getCookingtime(), recipeTestEntity.getProperty("cookingtime"));
 		assertEquals(recipe.getCookingtimeunit(), recipeTestEntity.getProperty("cookingtimeunit"));
 		assertEquals(recipe.getServings(), recipeTestEntity.getProperty("servings"));
-		assertEquals(recipe.getRecipeImages(), images);
 	}
 
 	@Test
@@ -117,6 +133,25 @@ public class RecipeTest {
 	}
 	
 	@Test
+	public void testIngredients(){
+		Recipe recipe = new Recipe();
+		recipe.setIngredients(ingredients);
+		assertEquals(ingredients, recipe.getIngredients());
+		
+		recipe.clearIngredients();
+		assertEquals(0, recipe.getIngredients().size());
+		
+		recipe.addIngredient(ingredients.get(0));
+		recipe.addIngredient(ingredients.get(1));
+		assertEquals(ingredients, recipe.getIngredients());
+		
+		recipe.removeIngredient(1);
+		assertEquals(1, recipe.getIngredients().size());
+		assertEquals(ingredients.get(0), recipe.getIngredients().get(0));	
+	}
+	
+	
+	@Test
     public void testSave1() {
         doSave();
     }
@@ -141,6 +176,7 @@ public class RecipeTest {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Recipe recipe = new Recipe(recipeTestEntity);
 		recipe.setRecipeImages(images);
+		recipe.setIngredients(ingredients);
 		pm.makePersistent(recipe);
 		pm.close();
 		
