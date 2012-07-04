@@ -116,9 +116,9 @@ public class RecipeImage {
 		try{
 			FileService fileService = FileServiceFactory.getFileService();
 			AppEngineFile file = fileService.createNewBlobFile("application/octet-stream");
-			writeChannel = fileService.openWriteChannel(file, true);
+			writeChannel = fileService.openWriteChannel(file, true);		
 			PrintWriter out = new PrintWriter(Channels.newWriter(writeChannel, "UTF8"));
-			out.println(image.getValue());
+			out.print(image.getValue());
 			out.close();
 			writeChannel.closeFinally();
 			blobKey = fileService.getBlobKey(file);
