@@ -90,4 +90,26 @@ public class RecipeImage {
 		return blobKey;
 	}
 	
+	
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    
+	    RecipeImage other = (RecipeImage) obj;
+	    
+	    if( id != other.getId() && 
+	    	!id.equals(other.getId())){
+	    	return false;
+	    }
+	    if( blobKey != other.getBlobKey() &&
+	    	!blobKey.equals(other.getBlobKey())){
+	    	return false;
+	    }
+	    return true;
+	}
+	
 }

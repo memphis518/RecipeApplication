@@ -1,12 +1,12 @@
 package com.recipewebservice.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ws.rs.Path;
 import javax.jdo.Query;
 import javax.jdo.PersistenceManager;
+import javax.jdo.Transaction;
 
 import com.recipewebservice.interfaces.IRecipe;
 import com.recipewebservice.models.Recipe;
@@ -35,12 +35,18 @@ public class RecipeService implements IRecipe{
 		boolean success = true;
 		
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try{
+		Transaction tx = pm.currentTransaction();
+		try{		
+	        tx.begin();
 			pm.makePersistent(recipe);
+			tx.commit();
 	    }catch(Exception e){	 
 	    	log.severe("Error saving recipe with error : " + e.getLocalizedMessage());
 	    	success = false;
 	    }finally{
+	    	if (tx.isActive()) {
+	            tx.rollback();
+	        }
 	        pm.close();
 	    }
 		

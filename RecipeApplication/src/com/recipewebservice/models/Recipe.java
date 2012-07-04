@@ -36,9 +36,9 @@ public class Recipe {
 	private String cookingtimeunit;
 	@Persistent
 	private String servings;
-	@Persistent(mappedBy = "recipe")
+	@Persistent(mappedBy = "recipe", defaultFetchGroup = "true")
 	private List<RecipeImage> recipeImages;
-	@Persistent(mappedBy = "recipe")
+	@Persistent(mappedBy = "recipe", defaultFetchGroup = "true")
 	private List<Ingredient> ingredients;
 
 	public Recipe() {}
