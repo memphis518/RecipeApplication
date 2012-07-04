@@ -2,6 +2,8 @@ package com.recipeapplication.tests.models;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.channels.Channels;
@@ -54,8 +56,16 @@ public class RecipeImageTest {
 	public void testImageBlobRetrieve(){
 		BlobKey blobKey = null;
 		try {
-			blobKey = saveImageToBlobStore(testImageString);
-		} catch (IOException e) {
+			Class recipeImageReflect = Class.forName("com.recipewebservice.models.RecipeImage");
+			Object receiptImageReflectInstance = recipeImageReflect.newInstance();
+			Class params[] = new Class[1];
+			params[0] = Text.class;
+			Method saveImageMethod = recipeImageReflect.getDeclaredMethod("saveImageToBlobStore", params);
+			saveImageMethod.setAccessible(true);
+			Text args[] = new Text[1];
+			args[0] = testImageString;
+			blobKey = (BlobKey) saveImageMethod.invoke(receiptImageReflectInstance, args);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		assertNotNull(blobKey);
@@ -63,24 +73,6 @@ public class RecipeImageTest {
 		recipeImage.setBlobKey(blobKey);
 		Text retrievedImageString = recipeImage.getImage();
 		assertEquals(testImageString.getValue(),retrievedImageString.getValue());
-	}
-	
-	private BlobKey saveImageToBlobStore(Text image) throws IOException{
-		FileWriteChannel writeChannel = null;
-		BlobKey blobKey = null;
-		try{
-			FileService fileService = FileServiceFactory.getFileService();
-			AppEngineFile file = fileService.createNewBlobFile("application/octet-stream");
-			writeChannel = fileService.openWriteChannel(file, true);
-			PrintWriter out = new PrintWriter(Channels.newWriter(writeChannel, "UTF8"));
-			out.print(image.getValue());
-			out.close();
-			writeChannel.closeFinally();
-			blobKey = fileService.getBlobKey(file);
-		} catch (Exception e){
-			System.out.println("Error saving image: " + e.getLocalizedMessage());
-		} 
-		return blobKey;
 	}
 	
 }
